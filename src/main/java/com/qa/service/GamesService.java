@@ -1,6 +1,7 @@
 package com.qa.service;
 
 import com.qa.domain.Game;
+import com.qa.exceptions.GameNotFoundException;
 import com.qa.repo.GamesRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,5 +26,8 @@ public class GamesService {
         return this.repo.save(game);
     }
 
+    public Game findGameById(Long id){
+        return this.repo.findById(id).orElseThrow(GameNotFoundException::new);
+    }
 
 }
