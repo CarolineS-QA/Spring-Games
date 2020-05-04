@@ -30,4 +30,21 @@ public class GamesService {
         return this.repo.findById(id).orElseThrow(GameNotFoundException::new);
     }
 
+    // This way, it will keep the original data if it has not been changed?
+    public Game updateGame(Long id, Game game){
+        Game update = findGameById(id);
+        update.setTitle(game.getTitle());
+        update.setDescription(game.getDescription());
+        update.setReleaseDate(game.getReleaseDate());
+        update.setPrice(game.getPrice());
+        return this.repo.save(update);
+    }
+
+    public boolean deleteGame(Long id){
+        if(!this.repo.existsById(id)){
+            throw new GameNotFoundException();
+        }
+        this.repo.deleteById(id);
+        return this.repo.existsById(id);
+    }
 }
