@@ -30,4 +30,14 @@ public class GamesController {
     public Game getGameById(@PathVariable Long id){
         return this.service.findGameById(id);
     }
+
+    @PutMapping("/updateGame/{id}")
+    public Game updateGame(@PathVariable Long id, @RequestBody Game game){
+        return this.service.updateGame(id, game);
+    }
+
+    @DeleteMapping("/deleteGame/{id}")
+    public boolean deleteNote(@PathVariable Long id){
+        return this.service.deleteGame(id);
+    }
 }
