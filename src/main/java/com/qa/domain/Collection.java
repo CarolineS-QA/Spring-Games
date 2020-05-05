@@ -1,8 +1,8 @@
 package com.qa.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Collection {
@@ -11,6 +11,8 @@ public class Collection {
     @GeneratedValue
     private Long collection_id;
     private String name;
+    @OneToMany
+    private List<Game> games = new ArrayList<>();
 
     public Long getCollection_id() {
         return collection_id;
@@ -26,5 +28,13 @@ public class Collection {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Game> getGames() {
+        return games;
+    }
+
+    public void setGames(List<Game> games) {
+        this.games = games;
     }
 }
