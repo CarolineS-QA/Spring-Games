@@ -11,7 +11,7 @@ public class Collection {
     @GeneratedValue
     private Long collection_id;
     private String name;
-    @OneToMany
+    @OneToMany(mappedBy = "collection")
     private List<Game> games = new ArrayList<>();
 
     public Long getCollection_id() {
