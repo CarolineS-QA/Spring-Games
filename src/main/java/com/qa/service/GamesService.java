@@ -1,8 +1,10 @@
 package com.qa.service;
 
 import com.qa.domain.Game;
+import com.qa.dto.GameDTO;
 import com.qa.exceptions.GameNotFoundException;
 import com.qa.repo.GamesRepo;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,11 +13,17 @@ import java.util.List;
 @Service
 public class GamesService {
 
-    public final GamesRepo repo;
+    private final GamesRepo repo;
+    private final ModelMapper mapper;
 
     @Autowired
-    public GamesService(GamesRepo repo) {
+    public GamesService(GamesRepo repo, ModelMapper mapper) {
         this.repo = repo;
+        this.mapper = mapper;
+    }
+
+    public GameDTO mapToDTO(Game game){
+        return this.mapper.map(game,GameDTO.class);
     }
 
     public List<Game> readGames(){
