@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class GamesService {
@@ -26,12 +27,13 @@ public class GamesService {
         return this.mapper.map(game,GameDTO.class);
     }
 
-    public List<Game> readGames(){
-        return this.repo.findAll();
+    public List<GameDTO> readGames(){
+        return this.repo.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
-    public Game createGame(Game game){
-        return this.repo.save(game);
+    public GameDTO createGame(Game game){
+        Game tempGame = this.repo.save(game);
+        return this.mapToDTO(tempGame);
     }
 
     public Game findGameById(Long id){
