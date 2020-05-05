@@ -14,7 +14,7 @@ public class Game {
     private String title;
     private String description;
     private Date releaseDate;
-    private String platforms; // list?? pc: y, xbox: n, ps: y, switch: n
+    //private String platforms; // list?? pc: y, xbox: n, ps: y, switch: n
     private BigDecimal price;
     @ManyToOne(targetEntity = Collection.class)
     private Collection collection;
@@ -58,13 +58,13 @@ public class Game {
         this.releaseDate = releaseDate;
     }
 
-    public String getPlatforms() {
-        return platforms;
-    }
-
-    public void setPlatforms(String platforms) {
-        this.platforms = platforms;
-    }
+//    public String getPlatforms() {
+//        return platforms;
+//    }
+//
+//    public void setPlatforms(String platforms) {
+//        this.platforms = platforms;
+//    }
 
     public BigDecimal getPrice() {
         return price;
@@ -83,12 +83,12 @@ public class Game {
                 Objects.equals(getTitle(), game.getTitle()) &&
                 Objects.equals(getDescription(), game.getDescription()) &&
                 Objects.equals(getReleaseDate(), game.getReleaseDate()) &&
-                Objects.equals(getPlatforms(), game.getPlatforms()) &&
+                //Objects.equals(getPlatforms(), game.getPlatforms()) &&
                 Objects.equals(getPrice(), game.getPrice());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getGameId(), getTitle(), getDescription(), getReleaseDate(), getPlatforms(), getPrice());
+        return Objects.hash(getGameId(), getTitle(), getDescription(), getReleaseDate(), /*getPlatforms(),*/ getPrice());
     }
 }
