@@ -2,3 +2,5 @@
 
 This is another worked example based from Tadas' [repo](https://github.com/tvaidotas/SpringNotes).
 Learning more about table relationships.
+
+Creating relationships between entities.
