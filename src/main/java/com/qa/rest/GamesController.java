@@ -17,7 +17,7 @@ public class GamesController {
     }
 
     @GetMapping("/getAllGames")
-    public List<Game> getAllNotes(){
+    public List<Game> getAllGames(){
         return this.service.readGames();
     }
 
@@ -37,7 +37,7 @@ public class GamesController {
     }
 
     @DeleteMapping("/deleteGame/{id}")
-    public boolean deleteNote(@PathVariable Long id){
+    public boolean deleteGame(@PathVariable Long id){
         return this.service.deleteGame(id);
     }
 }

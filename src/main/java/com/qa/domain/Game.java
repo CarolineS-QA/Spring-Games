@@ -1,9 +1,6 @@
 package com.qa.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Objects;
@@ -19,7 +16,16 @@ public class Game {
     private Date releaseDate;
     private String platforms; // list?? pc: y, xbox: n, ps: y, switch: n
     private BigDecimal price;
+    @ManyToOne(targetEntity = Collection.class)
+    private Collection collection;
 
+    public Collection getCollection() {
+        return collection;
+    }
+
+    public void setCollection(Collection collection) {
+        this.collection = collection;
+    }
     public Long getGameId() {
         return gameId;
     }
