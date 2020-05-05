@@ -36,18 +36,19 @@ public class GamesService {
         return this.mapToDTO(tempGame);
     }
 
-    public Game findGameById(Long id){
-        return this.repo.findById(id).orElseThrow(GameNotFoundException::new);
+    public GameDTO findGameById(Long id){
+        return this.mapToDTO(this.repo.findById(id).orElseThrow(GameNotFoundException::new));
     }
 
     // This way, it will keep the original data if it has not been changed?
-    public Game updateGame(Long id, Game game){
-        Game update = findGameById(id);
+    public GameDTO updateGame(Long id, Game game){
+        Game update = this.repo.findById(id).orElseThrow(GameNotFoundException::new);
         update.setTitle(game.getTitle());
         update.setDescription(game.getDescription());
         update.setReleaseDate(game.getReleaseDate());
         update.setPrice(game.getPrice());
-        return this.repo.save(update);
+        Game tempGame = this.repo.save(update);
+        return this.mapToDTO(tempGame);
     }
 
     public boolean deleteGame(Long id){
