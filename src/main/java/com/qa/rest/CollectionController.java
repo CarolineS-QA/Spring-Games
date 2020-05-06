@@ -27,7 +27,7 @@ public class CollectionController {
 
     @PostMapping("/createCollection")
     public ResponseEntity<CollectionDTO> createCollection(@RequestBody Collection collection){
-        return new ResponseEntity<CollectionDTO>(this.service.createCollection(collection), HttpStatus.CREATED);
+        return new ResponseEntity<>(this.service.createCollection(collection), HttpStatus.CREATED);
     }
 
     @GetMapping("/getCollectionById/{id}")
