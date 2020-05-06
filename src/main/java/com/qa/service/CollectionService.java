@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CollectionService {
@@ -26,22 +27,23 @@ public class CollectionService {
         return this.mapper.map(collection, CollectionDTO.class);
     }
 
-    public List<Collection> readCollections(){
-        return this.repo.findAll();
+    public List<CollectionDTO> readCollections(){
+        return this.repo.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
-    public Collection createCollection(Collection collection){
-        return this.repo.save(collection);
+    public CollectionDTO createCollection(Collection collection){
+        return this.mapToDTO(this.repo.save(collection));
     }
 
-    public Collection findCollectionById(Long id){
-        return this.repo.findById(id).orElseThrow(CollectionNotFoundException::new);
+    public CollectionDTO findCollectionById(Long id){
+        return this.mapToDTO(this.repo.findById(id).orElseThrow(CollectionNotFoundException::new));
     }
 
-    public Collection updateCollection(Long id, Collection collection){
-        Collection update = findCollectionById(id);
+    public CollectionDTO updateCollection(Long id, Collection collection){
+        Collection update = this.repo.findById(id).orElseThrow(CollectionNotFoundException::new);
         update.setName(collection.getName());
-        return this.repo.save(update);
+        Collection tempCollection = this.repo.save(update);
+        return this.mapToDTO(tempCollection);
     }
 
     public boolean deleteCollection(Long id){
