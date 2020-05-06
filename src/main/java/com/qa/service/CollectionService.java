@@ -1,8 +1,10 @@
 package com.qa.service;
 
 import com.qa.domain.Collection;
+import com.qa.dto.CollectionDTO;
 import com.qa.exceptions.CollectionNotFoundException;
 import com.qa.repo.CollectionRepo;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,11 +12,18 @@ import java.util.List;
 
 @Service
 public class CollectionService {
-    public final CollectionRepo repo;
+    private final CollectionRepo repo;
+
+    private final ModelMapper mapper;
 
     @Autowired
-    public CollectionService(CollectionRepo repo) {
+    public CollectionService(CollectionRepo repo, ModelMapper mapper) {
         this.repo = repo;
+        this.mapper = mapper;
+    }
+
+    private CollectionDTO mapToDTO(Collection collection){
+        return this.mapper.map(collection, CollectionDTO.class);
     }
 
     public List<Collection> readCollections(){
